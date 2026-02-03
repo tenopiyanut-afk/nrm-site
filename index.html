@@ -1,7 +1,7 @@
 <!--
   Neramit Dai Mai Co., Ltd.
   Landing Page
-  Version: 0.01
+  Version: 0.03
 -->
 
 <!DOCTYPE html>
@@ -113,32 +113,62 @@
     <div class="service">
       <h3>🎮 Game Development</h3>
       <p>
-        Design and development of games from concept to launch,
-        including gameplay systems, art, animation, and balance.
+        End-to-end game creation from early concept to launch and live support. We design deep yet accessible gameplay systems, memorable characters, and polished player experiences. Our work covers game mechanics, balancing, progression systems, art direction, animation, UI/UX, and production pipelines—supporting both original IPs and collaborative projects.
       </p>
     </div>
 
     <div class="service">
       <h3>🌐 Website Development</h3>
       <p>
-        Modern websites and web applications using clean UX,
-        scalable frontend, and reliable backend solutions.
+        Design and development of modern, storytelling-driven websites and web applications. We focus on clean UX, responsive design, scalable frontend architecture, and reliable backend solutions. Our websites are built to clearly communicate brand identity, support products and communities, and grow alongside your business or IP.
       </p>
     </div>
 
     <div class="service">
       <h3>🧠 Technology Solutions</h3>
       <p>
-        Gamification, interactive systems, and digital platforms
-        tailored for education, culture, and business.
+        Creative technology tailored for games, education, culture, and business. We develop gamification systems, interactive platforms, and digital tools that transform ideas into engaging experiences—combining design thinking, system design, and technology to make learning, interaction, and storytelling more impactful.
       </p>
     </div>
   </div>
 </section>
 
-<!-- SERVICES -->
-<section id="services" class="section">
+<!-- CLIENT -->
+<section id="clients" class="section">
   <h2 class="section-title">Clients & Partner</h2>
+  <div class="client-scroll-wrapper">
+  
+    <div class="client-scroll">
+
+      <div class="client-item" data-name="MED TU">
+        <a href="">
+        <img src="image/client/2.png" alt="Medicine Thammasat">
+        </a>
+      </div>
+      <div class="client-item" data-name="buzzfreeze solution co.,ltd">
+        <a href="https://buzzfreeze.com/">
+        <img src="image/client/1.png" alt="Buzzfreeze Solution">
+        </a>
+      </div>
+      <div class="client-item" data-name="relearn solution co.,ltd">
+        <a href="">
+        <img src="image/client/3.png" alt="Relearn Solution">
+        </a>
+      </div>
+      <div class="client-item" data-name="one super ai co.,ltd">
+        <a href="https://www.onesuper.ai/">
+        <img src="image/client/4.png" alt="One Super AI">
+        </a>
+      </div>
+      <div class="client-item" data-name="knightclub co.,ltd">
+        <a href="https://www.knightclub.co.th/">
+        <img src="image/client/5.png" alt="Knight Club">
+        </a>
+      </div>
+
+    </div>
+
+  </div>
 </section>
 
 <!-- ABOUT -->
@@ -209,6 +239,12 @@
 </section>
 
 <footer class="footer">
+      <a href="index-th.html">
+      <span class="lang-icon th" title="ภาษาไทย"></span>
+      </a>
+      <a href="index.html">
+      <span class="lang-icon en" title="English"></span>
+      </a>
   © 2026, NRM Company Limited
 </footer>
 
@@ -250,11 +286,9 @@
   (function () {
     const container = document.getElementById("brandname");
     let dragged = null;
-
     function getLetterUnderCursor(x, y) {
       return document.elementFromPoint(x, y)?.closest(".letter");
     }
-
     container.addEventListener("mousedown", (e) => {
       const target = e.target.closest(".letter");
       if (!target) return;
@@ -262,7 +296,6 @@
       dragged = target;
       dragged.classList.add("dragging");
     });
-
     document.addEventListener("mousemove", (e) => {
       if (!dragged) return;
 
@@ -277,7 +310,6 @@
       container.insertBefore(dragged, target);
       container.insertBefore(target, draggedNext);
     });
-
     document.addEventListener("mouseup", () => {
       if (!dragged) return;
 
@@ -285,5 +317,31 @@
       dragged = null;
     });
   })();
+
+  const slider = document.querySelector(".client-scroll");
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+  slider.addEventListener("mousedown", (e) => {
+    isDown = true;
+    slider.classList.add("dragging");
+    startX = e.pageX - slider.offsetLeft;
+    scrollLeft = slider.scrollLeft;
+  });
+  slider.addEventListener("mouseleave", () => {
+    isDown = false;
+    slider.classList.remove("dragging");
+  });
+  slider.addEventListener("mouseup", () => {
+    isDown = false;
+    slider.classList.remove("dragging");
+  });
+  slider.addEventListener("mousemove", (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - slider.offsetLeft;
+    const walk = (x - startX) * 1.6;
+    slider.scrollLeft = scrollLeft - walk;
+  });
 </script>
 </html>
