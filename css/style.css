@@ -390,6 +390,21 @@ p {
 .icon.solution {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%2300b4e6' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath d='M12 2a7 7 0 0 0-4 12.8V17a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-2.2A7 7 0 0 0 12 2z'/%3E%3Cpath d='M9 21h6M9 17h6'/%3E%3C/svg%3E");
     }
+.lang-icon {
+    width: 16px;
+    height: 16px;
+    border-radius: 40%;
+    display: inline-block;
+    background-size: cover;
+    background-position: center;
+    }
+.lang-icon.th {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 5 3'%3E%3Crect width='5' height='3' fill='%23A51931'/%3E%3Crect y='0.6' width='5' height='1.8' fill='%23F4F5F8'/%3E%3Crect y='1.1' width='5' height='0.8' fill='%232D2A4A'/%3E%3C/svg%3E");
+    }
+.lang-icon.en {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 30'%3E%3CclipPath id='s'%3E%3Cpath d='M0,0 v30 h60 v-30 z'/%3E%3C/clipPath%3E%3Cg clip-path='url(%23s)'%3E%3Cpath fill='%23012169' d='M0,0 v30 h60 v-30 z'/%3E%3Cpath stroke='%23fff' stroke-width='6' d='M0,0 L60,30 M60,0 L0,30'/%3E%3Cpath stroke='%23C8102E' stroke-width='4' d='M0,0 L60,30 M60,0 L0,30'/%3E%3Cpath stroke='%23fff' stroke-width='10' d='M30,0 v30 M0,15 h60'/%3E%3Cpath stroke='%23C8102E' stroke-width='6' d='M30,0 v30 M0,15 h60'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
 /*<!----- RESPONSIVE ----->*/
 @media (max-width: 856px) {
   .hero-grid, .services-grid, .about-grid, .contact-grid {
