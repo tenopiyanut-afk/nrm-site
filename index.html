@@ -1,7 +1,7 @@
 <!--
   Neramit Dai Mai Co., Ltd.
   Landing Page
-  Version: 0.03
+  Version: 0.04
 -->
 
 <!DOCTYPE html>
@@ -62,7 +62,7 @@
       </p>
       <div class="hero-actions">
         <a class="btn primary" href="#showcase">Our Games</a>
-        <a class="btn outline" href="#contact">Contact Us</a>
+        <a class="btn outline" href="https://line.me/R/ti/p/@neramit.dm">Contact Us</a>
       </div>
     </div>
     <div class="brand-logo">
@@ -73,30 +73,39 @@
 
 <!-- SHOWCASES -->
 <section id="showcase" class="section">
-  <h2 class="section-title">Showcases</h2>
+  <h2 class="section-title">
+        <span class="letter" draggable="true">S</span>
+        <span class="letter" draggable="true">H</span>
+        <span class="letter" draggable="true">O</span>
+        <span class="letter" draggable="true">W</span>
+        <span class="letter" draggable="true">C</span>
+        <span class="letter" draggable="true">A</span>
+        <span class="letter" draggable="true">S</span>
+        <span class="letter" draggable="true">E</span>
+  </h2>
 
   <div class="container grid showcase-grid">
 
     <div class="showcase-card1">  
-      <a href="index.html" class="showcase-logo">
+      <a href="sornthai1.html" class="showcase-logo">
       <img src="image/logo/sorn1.png" alt="SornThai 1 Logo" class="showcase-img">
       </a>
     </div>
     
     <div class="showcase-card1">  
-      <a href="index.html" class="showcase-logo">
+      <a href="sornthai2.html" class="showcase-logo">
       <img src="image/logo/sorn2.png" alt="SornThai 2 Logo" class="showcase-img">
       </a>
     </div>
     
     <div class="showcase-card1">  
-      <a href="index.html" class="showcase-logo">
+      <a href="sornthai3.html" class="showcase-logo">
       <img src="image/logo/sorn3.png" alt="SornThai 3 Logo" class="showcase-img">
       </a>
     </div>
     
     <div class="showcase-card1">  
-      <a href="index.html" class="showcase-logo">
+      <a href="sornthai4.html" class="showcase-logo">
       <img src="image/logo/sorn4.png" alt="SornThai 4 Logo" class="showcase-img">
       </a>
     </div>
@@ -106,7 +115,15 @@
 
 <!-- SERVICES -->
 <section id="services" class="section">
-  <h2 class="section-title">Services</h2>
+  <h2 class="section-title">
+        <span class="letter" draggable="true">S</span>
+        <span class="letter" draggable="true">E</span>
+        <span class="letter" draggable="true">R</span>
+        <span class="letter" draggable="true">V</span>
+        <span class="letter" draggable="true">I</span>
+        <span class="letter" draggable="true">C</span>
+        <span class="letter" draggable="true">E</span>
+  </h2>
 
   <div class="container grid services-grid">
 
@@ -135,7 +152,24 @@
 
 <!-- CLIENT -->
 <section id="clients" class="section">
-  <h2 class="section-title">Clients & Partner</h2>
+  <h2 class="section-title">
+        <span class="letter" draggable="true">C</span>
+        <span class="letter" draggable="true">L</span>
+        <span class="letter" draggable="true">I</span>
+        <span class="letter" draggable="true">E</span>
+        <span class="letter" draggable="true">N</span>
+        <span class="letter" draggable="true">T</span>
+        <span class="letter" draggable="true"> </span>
+        <span class="letter" draggable="true">&</span>
+        <span class="letter" draggable="true"> </span>
+        <span class="letter" draggable="true">P</span>
+        <span class="letter" draggable="true">A</span>
+        <span class="letter" draggable="true">R</span>
+        <span class="letter" draggable="true">T</span>
+        <span class="letter" draggable="true">N</span>
+        <span class="letter" draggable="true">E</span>
+        <span class="letter" draggable="true">R</span>
+  </h2>
   <div class="client-scroll-wrapper">
   
     <div class="client-scroll">
@@ -173,7 +207,16 @@
 
 <!-- ABOUT -->
 <section id="about" class="section">
-  <h2 class="section-title">About Us</h2>
+  <h2 class="section-title">
+        <span class="letter" draggable="true">A</span>
+        <span class="letter" draggable="true">B</span>
+        <span class="letter" draggable="true">O</span>
+        <span class="letter" draggable="true">U</span>
+        <span class="letter" draggable="true">T</span>
+        <span class="letter" draggable="true"> </span>
+        <span class="letter" draggable="true">U</span>
+        <span class="letter" draggable="true">S</span>
+      </h2>
 
   <div class="container about-grid">
     <div class="about-image">
@@ -196,7 +239,15 @@
 
 <!-- CONTACT -->
 <section id="contact" class="section">
-  <h2 class="section-title">Contact</h2>
+  <h2 class="section-title">
+        <span class="letter" draggable="true">C</span>
+        <span class="letter" draggable="true">O</span>
+        <span class="letter" draggable="true">N</span>
+        <span class="letter" draggable="true">T</span>
+        <span class="letter" draggable="true">A</span>
+        <span class="letter" draggable="true">C</span>
+        <span class="letter" draggable="true">T</span>
+  </h2>
 
   <div class="container contact-grid">
 
@@ -253,8 +304,8 @@
   (function () {
     const letters = document.querySelectorAll(".letter");
 
-    const FLEE_RADIUS = 80;   // how close mouse must be
-    const MAX_MOVE = 28;      // max flee distance
+    const FLEE_RADIUS = 80;
+    const MAX_MOVE = 60;
 
     document.addEventListener("mousemove", (e) => {
       const mouseX = e.clientX;
@@ -281,40 +332,6 @@
           letter.style.transform = "translate(0, 0)";
         }
       });
-    });
-  })();
-  (function () {
-    const container = document.getElementById("brandname");
-    let dragged = null;
-    function getLetterUnderCursor(x, y) {
-      return document.elementFromPoint(x, y)?.closest(".letter");
-    }
-    container.addEventListener("mousedown", (e) => {
-      const target = e.target.closest(".letter");
-      if (!target) return;
-
-      dragged = target;
-      dragged.classList.add("dragging");
-    });
-    document.addEventListener("mousemove", (e) => {
-      if (!dragged) return;
-
-      const target = getLetterUnderCursor(e.clientX, e.clientY);
-      if (!target || target === dragged) return;
-
-      const draggedNext =
-        dragged.nextSibling === target
-          ? dragged
-          : dragged.nextSibling;
-
-      container.insertBefore(dragged, target);
-      container.insertBefore(target, draggedNext);
-    });
-    document.addEventListener("mouseup", () => {
-      if (!dragged) return;
-
-      dragged.classList.remove("dragging");
-      dragged = null;
     });
   })();
 

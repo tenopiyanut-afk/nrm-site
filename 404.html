@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>404 – Pong Escape</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #0f172a;
+    overflow: hidden;
+    font-family: system-ui, sans-serif;
+    color: white;
+  }
+
+  #game {
+    position: fixed;
+    inset: 0;
+    background-image: url("../image/BG.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
+
+  .paddle {
+    position: absolute;
+    bottom: 24px;
+    width: 120px;
+    height: 14px;
+    background: #38bdf8;
+    border-radius: 999px;
+  }
+
+  .dino {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    pointer-events: none;
+  }
+
+  .ui {
+    position: fixed;
+    top: 16px;
+    width: 100%;
+    text-align: center;
+    opacity: 0.9;
+  }
+
+  .game-over {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(2,6,23,0.9);
+    text-align: center;
+  }
+
+button {
+    background: #38bdf8;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    }
+
+#timer {
+    font-size: 48px;
+    font-family: monospace;
+    color: #fff;
+    }
+</style>
+</head>
+
+<body>
+<div id="game">
+  <div class="ui">
+    <h1>404 – Pong Escape</h1>
+    <p>Keep Pong Here. Don’t let Pong Escape.</p>
+  </div>
+
+  <img src="image/pong/ball.png" class="dino" id="dino" />
+  <div class="paddle" id="paddle"></div>
+</div>
+
+<div class="game-over" id="gameOver">
+  <div>
+    <h1>Pong Escaped!</h1>
+    <p>Pong was caged for</p>
+    <span id="timer">0s</span>
+    <p>Right Now 404 – Pong not found</p>
+    <br>
+    <button onclick="restart()">Try Again</button>
+    <br><br>
+    <a href="/" style="color:#38bdf8">Get Back Home</a>
+  </div>
+</div>
+
+<script>
+window.addEventListener("resize", () => {
+  scale = Math.min(window.innerWidth / BASE_WIDTH, 1);
+  pongSize = 112 * scale;
+
+  dino.style.width = pongSize + "px";
+  dino.style.height = pongSize + "px";
+});
+
+let startTime = Date.now();
+let survivedSeconds = 0;
+let gameOver = false;
+const dino = document.getElementById("dino");
+const paddle = document.getElementById("paddle");
+const gameOverScreen = document.getElementById("gameOver");
+const BASE_WIDTH = 1080;
+let scale = Math.min(window.innerWidth / BASE_WIDTH, 1);
+const BASE_SPEED = 4 * scale;
+const MAX_SPEED = 10 * scale;
+const MIN_PONG_SIZE = 140;
+const BASE_PONG_SIZE = 280;
+let pongSize = 96 * scale;
+dino.style.width = pongSize + "px";
+dino.style.height = pongSize + "px";
+
+let x = window.innerWidth / 2;
+let y = window.innerHeight / 2;
+let vx = 4;
+let vy = 4;
+
+let paddleX = window.innerWidth / 2 - 60;
+const paddleWidth = 120;
+
+function reset() {
+  x = window.innerWidth / 2;
+  y = window.innerHeight / 2;
+    vx = 4 * scale * (Math.random() > 0.5 ? 1 : -1);
+    vy = 4 * scale;
+  paddleX = window.innerWidth / 2 - 60;
+
+  startTime = Date.now();
+  survivedSeconds = 0;
+  gameOver = false;
+
+  gameOverScreen.style.display = "none";
+}
+
+function restart() {
+  reset();
+  loop();
+}
+
+document.addEventListener("mousemove", e => {
+  paddleX = e.clientX - paddleWidth / 2;
+});
+
+function loop() {
+  x += vx;
+  y += vy;
+
+  // Wall bounce
+    if (x <= 0 || x + pongSize >= window.innerWidth) vx *= -1;
+    if (y <= 0) vy *= -1;
+
+    // Paddle collision
+    if (
+    y + pongSize >= window.innerHeight - 38 &&
+    x + pongSize > paddleX &&
+    x < paddleX + paddleWidth
+    ) {
+    vy *= -1;
+    //vx *= 1.2;
+    //vy *= 1.2;
+    let speed = Math.sqrt(vx * vx + vy * vy);
+
+    // increase slightly
+    speed = Math.min(speed + 1 * scale, MAX_SPEED);
+
+    // normalize direction
+    let angle = Math.atan2(vy, vx);
+    vx = Math.cos(angle) * speed;
+    vy = Math.sin(angle) * speed;
+
+    // reposition to avoid double collision
+    y = window.innerHeight - pongSize - 40;
+    }
+
+  // Fall = game over
+    if (y > window.innerHeight) {
+    gameOver = true;
+
+    // freeze final time exactly
+    survivedSeconds = Math.floor((Date.now() - startTime) / 1000);
+    document.getElementById("timer").innerText = survivedSeconds + "s";
+
+    gameOverScreen.style.display = "flex";
+    return;
+    }
+  dino.style.transform = `translate(${x}px, ${y}px)`;
+  paddle.style.transform = `translateX(${paddleX}px)`;
+
+  requestAnimationFrame(loop);
+}
+
+function update() {
+  if (gameOver) return;
+
+  survivedSeconds = Math.floor((Date.now() - startTime) / 1000);
+  document.getElementById("timer").innerText = survivedSeconds + "s";
+
+  requestAnimationFrame(update);
+}
+
+reset();
+update();
+loop();
+</script>
+</body>
+</html>
