@@ -18,7 +18,7 @@
   #game {
     position: fixed;
     inset: 0;
-    background-image: url("image/BG.png");
+    background-image: url("../image/BG.png");
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -33,7 +33,7 @@
     border-radius: 999px;
   }
 
-  .dino {
+  .pong {
     position: absolute;
     width: 64px;
     height: 64px;
@@ -82,7 +82,7 @@ button {
     <p>Keep Pong Here. Don’t let Pong Escape.</p>
   </div>
 
-  <img src="image/pong/ball.png" class="dino" id="dino" />
+  <img src="../image/pong/ball.png" class="pong" id="pong" />
   <div class="paddle" id="paddle"></div>
 </div>
 
@@ -104,14 +104,14 @@ window.addEventListener("resize", () => {
   scale = Math.min(window.innerWidth / BASE_WIDTH, 1);
   pongSize = 112 * scale;
 
-  dino.style.width = pongSize + "px";
-  dino.style.height = pongSize + "px";
+  pong.style.width = pongSize + "px";
+  pong.style.height = pongSize + "px";
 });
 
 let startTime = Date.now();
 let survivedSeconds = 0;
 let gameOver = false;
-const dino = document.getElementById("dino");
+const pong = document.getElementById("pong");
 const paddle = document.getElementById("paddle");
 const gameOverScreen = document.getElementById("gameOver");
 const BASE_WIDTH = 1080;
@@ -121,8 +121,8 @@ const MAX_SPEED = 80 * scale;
 const MIN_PONG_SIZE = 140;
 const BASE_PONG_SIZE = 280;
 let pongSize = 96 * scale;
-dino.style.width = pongSize + "px";
-dino.style.height = pongSize + "px";
+pong.style.width = pongSize + "px";
+pong.style.height = pongSize + "px";
 
 let x = window.innerWidth / 2;
 let y = window.innerHeight / 2;
@@ -197,7 +197,7 @@ function loop() {
     gameOverScreen.style.display = "flex";
     return;
     }
-  dino.style.transform = `translate(${x}px, ${y}px)`;
+  pong.style.transform = `translate(${x}px, ${y}px)`;
   paddle.style.transform = `translateX(${paddleX}px)`;
 
   requestAnimationFrame(loop);
