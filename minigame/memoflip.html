@@ -1,0 +1,189 @@
+<!--
+  Neramit Dai Mai Co., Ltd.
+  Minigame - MemoFlip
+  Version: 0.1.0
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>MemoFlip</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../css/minigame1css" />
+</head>
+
+<style>
+  * {
+  box-sizing: border-box;
+  font-family: system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #0f1220;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.memory-container {
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  opacity: 0.7;
+  margin-bottom: 24px;
+}
+
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 80px);
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.card {
+  width: 80px;
+  height: 80px;
+  perspective: 800px;
+  cursor: pointer;
+}
+
+.card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
+}
+
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  backface-visibility: hidden;
+}
+
+.card-front {
+  background: linear-gradient(135deg, #3a3f7a, #5b61d6);
+}
+
+.card-back {
+  background: #ffffff;
+  color: #000;
+  transform: rotateY(180deg);
+}
+
+button {
+  background: none;
+  border: 2px solid white;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: white;
+  color: black;
+}
+</style>
+
+<body>
+
+<main class="memory-container">
+  <h1>Memory Flip</h1>
+  <p class="subtitle">Match the pairs</p>
+
+  <div class="memory-grid" id="memoryGrid"></div>
+
+  <button id="resetBtn">Restart</button>
+</main>
+
+<script>
+  const symbols = ["ก", "ข", "จ", "ช", "ต", "ป"];
+  let cards = [...symbols, ...symbols];
+  let flipped = [];
+  let lockBoard = false;
+
+  const grid = document.getElementById("memoryGrid");
+  const resetBtn = document.getElementById("resetBtn");
+
+  function shuffle(array) {
+    return array.sort(() => Math.random() - 0.5);
+  }
+
+  function createBoard() {
+    grid.innerHTML = "";
+    flipped = [];
+    lockBoard = false;
+
+    shuffle(cards).forEach(symbol => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.dataset.symbol = symbol;
+
+      card.innerHTML = `
+        <div class="card-inner">
+          <div class="card-front"></div>
+          <div class="card-back">${symbol}</div>
+        </div>
+      `;
+
+      card.addEventListener("click", () => flipCard(card));
+      grid.appendChild(card);
+    });
+  }
+
+  function flipCard(card) {
+    if (lockBoard) return;
+    if (card.classList.contains("flipped")) return;
+
+    card.classList.add("flipped");
+    flipped.push(card);
+
+    if (flipped.length === 2) {
+      checkMatch();
+    }
+  }
+
+  function checkMatch() {
+    const [a, b] = flipped;
+    const match = a.dataset.symbol === b.dataset.symbol;
+
+    if (!match) {
+      lockBoard = true;
+      setTimeout(() => {
+        a.classList.remove("flipped");
+        b.classList.remove("flipped");
+        lockBoard = false;
+      }, 800);
+    }
+
+    flipped = [];
+  }
+
+  resetBtn.addEventListener("click", createBoard);
+
+  createBoard();
+</script>
+
+</body>
+</html>

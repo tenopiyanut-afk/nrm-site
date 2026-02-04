@@ -1,0 +1,211 @@
+<!--
+  Neramit Dai Mai Co., Ltd.
+  Minigame - Cosmetic2
+  Version: 1.0.0
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>COSMETIC</title>
+
+<style>
+body {
+  font-family: system-ui, sans-serif;
+  background-image: url("../image/BG3.png");
+  background-size: cover;
+  background-position: bottom;
+  background-attachment: fixed;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+}
+
+.game-wrap {
+  display: flex;
+  gap: 2rem;
+}
+
+/* Character Stage */
+.character {
+  position: relative;
+  width: 520px;
+  height: 760px;
+}
+
+.character img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+}
+
+.base  { z-index: 1; }
+.short { z-index: 2; }
+.shirt { z-index: 3; }
+.face  { z-index: 4; }
+.hat   { z-index: 5; }
+
+/* Controls */
+.controls {
+  display: grid;
+  gap: clamp(1rem, 1.5vw, 4rem);
+}
+
+.controls button {
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+  border: none;
+  background: #0b5ed7;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.controls button:hover {
+  background: #094bb3;
+}
+
+@media (max-width: 720px) {
+.character {
+    width: 260px;
+    height: 380px;
+    }
+}
+
+@media (max-width: 450px) {
+.character {
+    width: 195px;
+    height: 310px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="game-wrap">
+
+  <!-- CHARACTER -->
+  <div class="character">
+    <img src="../image/cosmetic/base/Base_02.png" alt="base girl" class="layer base" id="base_02">
+    <img src="../image/cosmetic/base/Base_01.png" alt="base boy" class="layer base" id="base_01">
+
+    <!-- LAYER ORDER -->
+    <img id="shirt" src="../image/cosmetic/itm1200.png" class="layer shirt">
+    <img id="short" src="../image/cosmetic/itm1300.png" class="layer short">
+    <img id="face"  src="../image/cosmetic/itm1100.png" class="layer face">
+    <img id="hat"   src="../image/cosmetic/itm1000.png" class="layer hat">
+  </div>
+
+  <!-- CONTROLS -->
+  <div class="controls">
+    <button onclick="toggleBase()">Skin</button>
+
+    <button onclick="randomItem('hat')">🎩</button>
+    <button onclick="randomItem('face')">🙂 </button>
+    <button onclick="randomItem('shirt')">👕 </button>
+    <button onclick="randomItem('short')">🩳 </button>
+
+    <button onclick="randomAll()">Random Outfit</button>
+  </div>
+
+</div>
+
+<script>
+const BASE_PATH = '../image/cosmetic/';
+const BASE_CHAR_PATH = '../image/cosmetic/base/';
+
+const items = {
+  base: [
+    BASE_CHAR_PATH + 'Base_01.png',
+    BASE_CHAR_PATH + 'Base_02.png'
+     ],
+  hat: [
+    BASE_PATH + 'itm1025.png',
+    BASE_PATH + 'itm1026.png',
+    BASE_PATH + 'itm1027.png',
+    BASE_PATH + 'itm1028.png',
+    BASE_PATH + 'itm1029.png',
+    BASE_PATH + 'itm1030.png'
+  ],
+  face: [
+    BASE_PATH + 'itm1108.png',
+    BASE_PATH + 'itm1109.png',
+    BASE_PATH + 'itm1110.png'
+  ],
+  shirt: [
+    BASE_PATH + 'itm1211.png',
+    BASE_PATH + 'itm1212.png',
+    BASE_PATH + 'itm1213.png',
+    BASE_PATH + 'itm1214.png',
+    BASE_PATH + 'itm1215.png',
+    BASE_PATH + 'itm1216.png'
+  ],
+  short: [
+    BASE_PATH + 'itm1315.png',
+    BASE_PATH + 'itm1316.png',
+    BASE_PATH + 'itm1317.png',
+    BASE_PATH + 'itm1318.png',
+    BASE_PATH + 'itm1319.png',
+    BASE_PATH + 'itm1320.png'
+  ]
+};
+
+const index = {
+  base: 0,
+  hat: 0,
+  face: 0,
+  shirt: 0,
+  short: 0
+};
+
+function randomItem(type) {
+  const layer = document.getElementById(type);
+
+  if (!layer || items[type].length === 0) return;
+
+  let newIndex;
+  do {
+    newIndex = Math.floor(Math.random() * items[type].length);
+  } while (newIndex === index[type]);
+
+  index[type] = newIndex;
+
+  // 🔥 FORCE visibility back on
+  layer.style.opacity = 1;
+  layer.style.display = 'block';
+  layer.style.visibility = 'visible';
+
+  layer.src = items[type][index[type]];
+}
+
+function randomAll() {
+  ['hat', 'face', 'shirt', 'short'].forEach(type => {
+    randomItem(type);
+  });
+}
+
+function toggleBase() {
+  index.base = (index.base + 1) % items.base.length;
+  document.getElementById('base_01').style.display = index.base === 0 ? 'block' : 'none';
+  document.getElementById('base_02').style.display = index.base === 1 ? 'block' : 'none';
+}
+
+localStorage.setItem('outfit', JSON.stringify(index));
+</script>
+
+</body>
+</html>
