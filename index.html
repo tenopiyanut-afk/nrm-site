@@ -1,7 +1,7 @@
 <!--
   Neramit Dai Mai Co., Ltd.
   Landing Page - EN
-  Version: 1.0.1
+  Version: 1.0.2
 -->
 
 <!DOCTYPE html>
@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="css/main-style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <!-- NAVBAR -->
@@ -111,10 +111,6 @@
       </a>
     </div>
 
-  </div>
-  
-  <div class="container grid showcase-grid2">
-
     <div class="showcase-card">  
       <a href="404.html" class="showcase-logo">
       <img src="image/logo/pongblob.png" alt="Pong Blob Logo" class="showcase-img">
@@ -182,31 +178,31 @@
         <span class="letter" draggable="true">E</span>
         <span class="letter" draggable="true">R</span>
   </h2>
-  <div class="scroll-wrapper">
+  <div class="client-scroll-wrapper">
   
-    <div class="scroll">
+    <div class="client-scroll">
 
       <div class="client-item" data-name="MED TU">
         <a href="">
         <img src="image/client/2.png" alt="Medicine Thammasat">
         </a>
       </div>
-      <div class="client-item" data-name="buzzfreeze solution co.,ltd">
+      <div class="client-item" data-name="buzzfreeze solution">
         <a href="https://buzzfreeze.com/">
         <img src="image/client/1.png" alt="Buzzfreeze Solution">
         </a>
       </div>
-      <div class="client-item" data-name="relearn solution co.,ltd">
+      <div class="client-item" data-name="relearn solution">
         <a href="">
         <img src="image/client/3.png" alt="Relearn Solution">
         </a>
       </div>
-      <div class="client-item" data-name="one super ai co.,ltd">
+      <div class="client-item" data-name="one super ai">
         <a href="https://www.onesuper.ai/">
         <img src="image/client/4.png" alt="One Super AI">
         </a>
       </div>
-      <div class="client-item" data-name="knightclub co.,ltd">
+      <div class="client-item" data-name="knightclub">
         <a href="https://www.knightclub.co.th/">
         <img src="image/client/5.png" alt="Knight Club">
         </a>
@@ -313,11 +309,12 @@
 
 </body>
 <script>
+
   (function () {
     const letters = document.querySelectorAll(".letter");
 
-    const FLEE_RADIUS = 80;
-    const MAX_MOVE = 60;
+    const FLEE_RADIUS = 80;   // how close mouse must be
+    const MAX_MOVE = 28;      // max flee distance
 
     document.addEventListener("mousemove", (e) => {
       const mouseX = e.clientX;
@@ -347,30 +344,106 @@
     });
   })();
 
-  const slider = document.querySelector(".scroll");
-  let isDown = false;
-  let startX;
-  let scrollLeft;
+  (function () {
+    const container = document.getElementById("brandname");
+    let dragged = null;
+    function getLetterUnderCursor(x, y) {
+      return document.elementFromPoint(x, y)?.closest(".letter");
+    }
+    container.addEventListener("mousedown", (e) => {
+      const target = e.target.closest(".letter");
+      if (!target) return;
+
+      dragged = target;
+      dragged.classList.add("dragging");
+    });
+    document.addEventListener("mousemove", (e) => {
+      if (!dragged) return;
+
+      const target = getLetterUnderCursor(e.clientX, e.clientY);
+      if (!target || target === dragged) return;
+
+      const draggedNext =
+        dragged.nextSibling === target
+          ? dragged
+          : dragged.nextSibling;
+
+      container.insertBefore(dragged, target);
+      container.insertBefore(target, draggedNext);
+    });
+    document.addEventListener("mouseup", () => {
+      if (!dragged) return;
+
+      dragged.classList.remove("dragging");
+      dragged = null;
+    });
+  })();
+
+document.addEventListener("DOMContentLoaded", () => {
+  const slider = document.querySelector(".client-scroll");
+  if (!slider) return;
+  let autoSpeed = 0.4;
+  let isDragging = false;
+  let startX = 0;
+  let scrollStart = 0;
+  let canScroll = false;
+
+  function setupScroll() {
+    slider.scrollLeft = 0;
+
+    const contentOverflows =
+      slider.scrollWidth > slider.clientWidth + 1;
+    if (slider.dataset.cloned) {
+      slider.innerHTML = slider.innerHTML.slice(
+        0,
+        slider.innerHTML.length / 2
+      );
+      delete slider.dataset.cloned;
+    }
+    if (contentOverflows) {
+      slider.innerHTML += slider.innerHTML;
+      slider.dataset.cloned = "true";
+      canScroll = true;
+    } else {
+      canScroll = false;
+    }
+  }
+  setupScroll();
+  window.addEventListener("resize", setupScroll);
+  function autoScroll() {
+    if (canScroll && !isDragging) {
+      slider.scrollLeft += autoSpeed;
+
+      if (slider.scrollLeft >= slider.scrollWidth / 2) {
+        slider.scrollLeft = 0;
+      }
+    }
+    requestAnimationFrame(autoScroll);
+  }
+  autoScroll();
   slider.addEventListener("mousedown", (e) => {
-    isDown = true;
+    if (!canScroll) return;
+    isDragging = true;
     slider.classList.add("dragging");
-    startX = e.pageX - slider.offsetLeft;
-    scrollLeft = slider.scrollLeft;
+    startX = e.pageX;
+    scrollStart = slider.scrollLeft;
+  });
+  document.addEventListener("mouseup", () => {
+    isDragging = false;
+    slider.classList.remove("dragging");
+  });
+  document.addEventListener("mousemove", (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    slider.scrollLeft = scrollStart - (e.pageX - startX);
+  });
+  slider.addEventListener("mouseenter", () => {
+    autoSpeed = 0;
   });
   slider.addEventListener("mouseleave", () => {
-    isDown = false;
-    slider.classList.remove("dragging");
+    autoSpeed = 0.4;
   });
-  slider.addEventListener("mouseup", () => {
-    isDown = false;
-    slider.classList.remove("dragging");
-  });
-  slider.addEventListener("mousemove", (e) => {
-    if (!isDown) return;
-    e.preventDefault();
-    const x = e.pageX - slider.offsetLeft;
-    const walk = (x - startX) * 1.6;
-    slider.scrollLeft = scrollLeft - walk;
-  });
+});
+
 </script>
 </html>
