@@ -1,7 +1,7 @@
 /*<!--
   Neramit Dai Mai Co., Ltd.
   M-Components CSS
-  Version: 1.0.0
+  Version: 1.0.2
 -->*/
 
 :root {
@@ -107,8 +107,8 @@
 
 .scroll-item {
     flex: 0 0 auto;
-    width: 80px;
-    height: 80px;
+    width: 160px;
+    height: 160px;
     border-radius: 50%;
     background-image: url("../image/BG.png");
     display: grid;
@@ -129,6 +129,7 @@
 .scroll-item:hover{
     transform: scale(1.2);
     }
+
 
 
 

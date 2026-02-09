@@ -1,7 +1,7 @@
 /*<!--
   Neramit Dai Mai Co., Ltd.
   M-Style CSS
-  Version: 1.0.0
+  Version: 1.0.2
 -->*/
 
 :root {
@@ -33,7 +33,7 @@ body {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: "Bai Jamjuree", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     }
 .container {
     max-width: 1280px;
@@ -156,7 +156,9 @@ p {
     overflow: hidden;
     mask-image: linear-gradient( to right, transparent 0%, var(--light) 6%, var(--light) 94%, transparent 100% );
     }
-
+.client-scroll-wrapper:hover .client-scroll {
+    animation-play-state: paused;
+    }   
 .client-scroll {
     display: flex;
     gap: 2rem;
@@ -325,9 +327,15 @@ p {
     font-weight: 600;
     }
 
-/*<!----- TEXT ----->*/
-
-
+/*<!----- ANIMATION ----->*/
+@keyframes client-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-45%);
+  }
+}
 /*<!----- RESPONSIVE ----->*/
 @media (max-width: 856px) {
   .hero-grid, .services-grid, .about-grid, .contact-grid {
@@ -342,21 +350,20 @@ p {
   .nav-inner {
     justify-content: center;
   }
+  .client-scroll-wrapper {
+    display:inline-block;
+  }
+  .client-scroll {
+    animation: client-marquee 10s linear infinite;
+    will-change: transform;
+  }
 }
 
 @media (max-width: 486px) {
-  .showcase-grid  {
-    grid-template-columns: 1fr;
-  }
-  .showcase-grid2  {
-    grid-template-columns: repeat(2, minmax(180px, 1fr));
-    margin-top: 20px;
-  }
   .brand-name,
   .contact-row {
     white-space: normal;
   }
-
   .navbar  {
     display: none;
   }
