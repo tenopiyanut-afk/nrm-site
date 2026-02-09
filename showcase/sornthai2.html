@@ -59,31 +59,13 @@
         <span class="letter" draggable="true">I</span>
         <span class="letter" draggable="true"> </span>
         <span class="letter" draggable="true">2</span>
-        <span class="letter" draggable="true"> </span>
-        <span class="letter" draggable="true"> </span>
-        <span class="letter" draggable="true"> </span>
-        <span class="letter" draggable="true"> </span>
-        <span class="letter" draggable="true">V</span>
-        <span class="letter" draggable="true">O</span>
-        <span class="letter" draggable="true">W</span>
-        <span class="letter" draggable="true">E</span>
-        <span class="letter" draggable="true">L</span>
-        <span class="letter" draggable="true">S</span>
-        <span class="letter" draggable="true"> </span>
-        <span class="letter" draggable="true">&</span>
-        <span class="letter" draggable="true"> </span>
-        <span class="letter" draggable="true">T</span>
-        <span class="letter" draggable="true">O</span>
-        <span class="letter" draggable="true">N</span>
-        <span class="letter" draggable="true">E</span>
-        <span class="letter" draggable="true">S</span>
+  <p>Vowels & Tones</p>
   </h2>
 
   <div class="tags">
-    <div class="tag">Education</div>
     <div class="tag">Thai Language</div>
-    <div class="tag">Vowel</div>
-    <div class="tag">Tone</div>
+    <div class="tag">Vowels</div>
+    <div class="tag">Tones</div>
   </div>
 
 <div class="video-wrapper">
@@ -134,60 +116,44 @@ in reading—while enjoying colorful gameplay and rewarding learning moments.
   
     <div class="scroll">
 
-      <div class="scroll-item" data-name="xxx">
-        <img src="../image/logo/0.png" alt="xxx">
+      <div class="scroll-item character-swap">
+        <img src="../image/character/ch01.png" class="img-default" alt="">
+        <img src="../image/character/ch.01_punch.gif" class="img-hover" alt="">
+      </div>
+   
+      <div class="scroll-item character-swap">
+        <img src="../image/character/ch02.png" class="img-default" alt="">
+        <img src="../image/character/ch.02_cheer.gif" class="img-hover" alt="">
+      </div>
+     
+      <div class="scroll-item">
+        <img src="../image/character/ch05.3A.png" alt="">
       </div>
 
-      <div class="scroll-item" data-name="xxx">
-        <img src="../image/logo/0.png" alt="xxx">
+      <div class="scroll-item">
+        <img src="../image/character/ch03-1.png" alt="">
       </div>
 
-      <div class="scroll-item" data-name="xxx">
-        <img src="../image/logo/0.png" alt="xxx">
+      <div class="scroll-item character-swap">
+        <img src="../image/character/ch07.1.png" class="img-default" alt="">
+        <img src="../image/character/ch07.2.png" class="img-hover" alt="">
       </div>
 
-      <div class="scroll-item" data-name="xxx">
-        <img src="../image/logo/0.png" alt="xxx">
+      <div class="scroll-item character-swap">
+        <img src="../image/character/ch09.png" class="img-default" alt="">
+        <img src="../image/character/ch.09_sweep.gif" class="img-hover" alt="">
       </div>
-
-      <div class="scroll-item" data-name="xxx">
-        <img src="../image/logo/0.png" alt="xxx">
+     
+      <div class="scroll-item character-swap">
+        <img src="../image/character/ch10.png" class="img-default" alt="">
+        <img src="../image/character/ch.10_throw.gif" class="img-hover" alt="">
       </div>
-
-      <div class="scroll-item" data-name="xxx">
-        <img src="../image/logo/0.png" alt="xxx">
+     
+      <div class="scroll-item character-swap">
+        <img src="../image/character/ch04.png" class="img-default" alt="">
+        <img src="../image/character/ch.04_raise.gif" class="img-hover" alt="">
       </div>
-
-      <div class="scroll-item" data-name="xxx">
-        <img src="../image/logo/0.png" alt="xxx">
-      </div>
-
-      <div class="scroll-item" data-name="xxx">
-        <img src="../image/logo/0.png" alt="xxx">
-      </div>
-
-      <div class="scroll-item" data-name="xxx">
-        <img src="../image/logo/0.png" alt="xxx">
-      </div>
-
-      <div class="scroll-item" data-name="xxx">
-        <img src="../image/logo/0.png" alt="xxx">
-      </div>
-
-      <div class="scroll-item" data-name="xxx">
-        <img src="../image/logo/0.png" alt="xxx">
-      </div>
-
-      <div class="scroll-item" data-name="xxx">
-        <img src="../image/logo/0.png" alt="xxx">
-      </div>
-
-      <div class="scroll-item" data-name="xxx">
-        <img src="../image/logo/0.png" alt="xxx">
-      </div>
-
-      </div>
-
+     
     </div>
 
   </div>
@@ -256,33 +222,6 @@ in reading—while enjoying colorful gameplay and rewarding learning moments.
     });
   })();
 
-  const slider = document.querySelector(".scroll");
-  let isDown = false;
-  let startX;
-  let scrollLeft;
-  slider.addEventListener("mousedown", (e) => {
-    isDown = true;
-    slider.classList.add("dragging");
-    startX = e.pageX - slider.offsetLeft;
-    scrollLeft = slider.scrollLeft;
-  });
-  slider.addEventListener("mouseleave", () => {
-    isDown = false;
-    slider.classList.remove("dragging");
-  });
-  slider.addEventListener("mouseup", () => {
-    isDown = false;
-    slider.classList.remove("dragging");
-  });
-  slider.addEventListener("mousemove", (e) => {
-    if (!isDown) return;
-    e.preventDefault();
-    const x = e.pageX - slider.offsetLeft;
-    const walk = (x - startX) * 1.6;
-    slider.scrollLeft = scrollLeft - walk;
-  });
-
-
 function openCosmetic() {
   document.body.style.overflow = 'hidden';
   document.getElementById('cosmeticOverlay').classList.add('show');
@@ -291,13 +230,10 @@ function closeCosmetic() {
   document.body.style.overflow = '';
   document.getElementById('cosmeticOverlay').classList.remove('show');
 }
-
-
 document.getElementById('cosmeticOverlay')
   .addEventListener('click', e => {
     if (e.target.id === 'cosmeticOverlay') closeCosmetic();
   });
-
 
 </script>
 </html>

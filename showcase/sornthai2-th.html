@@ -96,7 +96,7 @@
 </div>
 
 <p>
-In <strong>สอนไทย 2 (สระ และ วรรณยุกต์)</strong>, ผู้เล่นจะได้ดำดิ่งสู่โลกการเรียนรู้แสนสนุก ที่ทุกด่านถูกออกแบบมาเพื่อสอน เสียงและรูปแบบของสระภาษาไทย ผ่านกิจกรรมแบบโต้ตอบที่เข้าใจง่าย
+<strong>สอนไทย 2 (สระ และ วรรณยุกต์)</strong>, ผู้เล่นจะได้ดำดิ่งสู่โลกการเรียนรู้แสนสนุก ที่ทุกด่านถูกออกแบบมาเพื่อสอน เสียงและรูปแบบของสระภาษาไทย ผ่านกิจกรรมแบบโต้ตอบที่เข้าใจง่าย
 สำรวจสภาพแวดล้อมที่มีชีวิตชีวา และพบกับตัวละครที่เป็นมิตร เพื่อฝึกฝนทักษะต่าง ๆ ดังนี้
 <ul class="feature-list">
   <li>ระบุและจับคู่สระภาษาไทยกับเสียงที่ถูกต้อง</li>
@@ -123,58 +123,44 @@ In <strong>สอนไทย 2 (สระ และ วรรณยุกต์
   
     <div class="scroll">
 
-      <div class="scroll-item" data-name="xxx">
-        <img src="../image/logo/0.png" alt="xxx">
+      <div class="scroll-item character-swap">
+        <img src="../image/character/ch01.png" class="img-default" alt="">
+        <img src="../image/character/ch.01_punch.gif" class="img-hover" alt="">
+      </div>
+   
+      <div class="scroll-item character-swap">
+        <img src="../image/character/ch02.png" class="img-default" alt="">
+        <img src="../image/character/ch.02_cheer.gif" class="img-hover" alt="">
+      </div>
+     
+      <div class="scroll-item">
+        <img src="../image/character/ch05.3A.png" alt="">
       </div>
 
-      <div class="scroll-item" data-name="xxx">
-        <img src="../image/logo/0.png" alt="xxx">
+      <div class="scroll-item">
+        <img src="../image/character/ch03-1.png" alt="">
       </div>
 
-      <div class="scroll-item" data-name="xxx">
-        <img src="../image/logo/0.png" alt="xxx">
+      <div class="scroll-item character-swap">
+        <img src="../image/character/ch07.1.png" class="img-default" alt="">
+        <img src="../image/character/ch07.2.png" class="img-hover" alt="">
       </div>
 
-      <div class="scroll-item" data-name="xxx">
-        <img src="../image/logo/0.png" alt="xxx">
+      <div class="scroll-item character-swap">
+        <img src="../image/character/ch09.png" class="img-default" alt="">
+        <img src="../image/character/ch.09_sweep.gif" class="img-hover" alt="">
       </div>
-
-      <div class="scroll-item" data-name="xxx">
-        <img src="../image/logo/0.png" alt="xxx">
+     
+      <div class="scroll-item character-swap">
+        <img src="../image/character/ch10.png" class="img-default" alt="">
+        <img src="../image/character/ch.10_throw.gif" class="img-hover" alt="">
       </div>
-
-      <div class="scroll-item" data-name="xxx">
-        <img src="../image/logo/0.png" alt="xxx">
+     
+      <div class="scroll-item character-swap">
+        <img src="../image/character/ch04.png" class="img-default" alt="">
+        <img src="../image/character/ch.04_raise.gif" class="img-hover" alt="">
       </div>
-
-      <div class="scroll-item" data-name="xxx">
-        <img src="../image/logo/0.png" alt="xxx">
-      </div>
-
-      <div class="scroll-item" data-name="xxx">
-        <img src="../image/logo/0.png" alt="xxx">
-      </div>
-
-      <div class="scroll-item" data-name="xxx">
-        <img src="../image/logo/0.png" alt="xxx">
-      </div>
-
-      <div class="scroll-item" data-name="xxx">
-        <img src="../image/logo/0.png" alt="xxx">
-      </div>
-
-      <div class="scroll-item" data-name="xxx">
-        <img src="../image/logo/0.png" alt="xxx">
-      </div>
-
-      <div class="scroll-item" data-name="xxx">
-        <img src="../image/logo/0.png" alt="xxx">
-      </div>
-
-      <div class="scroll-item" data-name="xxx">
-        <img src="../image/logo/0.png" alt="xxx">
-      </div>
-
+     
       </div>
 
     </div>
@@ -245,33 +231,6 @@ In <strong>สอนไทย 2 (สระ และ วรรณยุกต์
     });
   })();
 
-  const slider = document.querySelector(".scroll");
-  let isDown = false;
-  let startX;
-  let scrollLeft;
-  slider.addEventListener("mousedown", (e) => {
-    isDown = true;
-    slider.classList.add("dragging");
-    startX = e.pageX - slider.offsetLeft;
-    scrollLeft = slider.scrollLeft;
-  });
-  slider.addEventListener("mouseleave", () => {
-    isDown = false;
-    slider.classList.remove("dragging");
-  });
-  slider.addEventListener("mouseup", () => {
-    isDown = false;
-    slider.classList.remove("dragging");
-  });
-  slider.addEventListener("mousemove", (e) => {
-    if (!isDown) return;
-    e.preventDefault();
-    const x = e.pageX - slider.offsetLeft;
-    const walk = (x - startX) * 1.6;
-    slider.scrollLeft = scrollLeft - walk;
-  });
-
-
 function openCosmetic() {
   document.body.style.overflow = 'hidden';
   document.getElementById('cosmeticOverlay').classList.add('show');
@@ -280,13 +239,10 @@ function closeCosmetic() {
   document.body.style.overflow = '';
   document.getElementById('cosmeticOverlay').classList.remove('show');
 }
-
-
 document.getElementById('cosmeticOverlay')
   .addEventListener('click', e => {
     if (e.target.id === 'cosmeticOverlay') closeCosmetic();
   });
-
 
 </script>
 </html>
